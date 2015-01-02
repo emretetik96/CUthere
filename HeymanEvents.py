@@ -12,9 +12,9 @@ def get_event_page_urls():
 
 def get_event_data(event_page_url):
 	event_data = {}
-	response = requests.get(event_page_url + root_url)
+	response = requests.get(event_page_url) ## + root_url)
 	soup = bs4.BeautifulSoup(response.text)
-	event_data['title'] = soup.select('itemprop="name"').get_text()
+	event_data['title'] = soup.select('span[itemprop="name"]') ##.get_text()
 	return event_data
 
 def show_event_info():
@@ -22,4 +22,4 @@ def show_event_info():
 	for event_page_url in event_page_urls:
 		print get_event_data(event_page_url)
 
-print get_event_page_urls()
+print show_event_info()
