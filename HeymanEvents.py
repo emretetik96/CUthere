@@ -14,8 +14,8 @@ def get_event_data(event_page_url):
 	event_data = {}
 	response = requests.get(event_page_url)
 	soup = bs4.BeautifulSoup(response.text)
-	event_data['title'] = soup.select('div.heading span[itemprop="name"]')
-	return event_data
+	event_data['title'] = soup.select('div.heading span[itemprop="name"]')[0].get_text()
+	return event_data.values()
 
 def show_event_info():
 	event_page_urls = get_event_page_urls()
