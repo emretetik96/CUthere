@@ -18,6 +18,11 @@ def get_event_data(event_page_url):
 	event_data['event_title'] = soup.select('div.heading span[itemprop="name"]')[0].get_text()
 	event_data['organization_title'] = ORGANIZATION_TITLE
 	event_data['location'] = soup.select('span[itemprop="location"]')[0].get_text()
+
+	event_data['event_description'] = ''
+	for paragraph in soup.select('div[itemprop="description"] p'):
+		event_data['event_description'] += paragraph.get_text()
+
 	dateTimeTogether = soup.select('em.date')[0].get_text()
 	if (dateTimeTogether.endswith('am') or dateTimeTogether.endswith('pm')):
 		timeIndex = dateTimeTogether.find(':') - 2
@@ -25,6 +30,7 @@ def get_event_data(event_page_url):
 		event_data['time'] = dateTimeTogether[timeIndex:]
 	else:
 		event_data['date'] = dateTimeTogether
+
 	return event_data
 	
 
