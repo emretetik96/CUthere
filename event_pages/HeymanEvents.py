@@ -40,11 +40,12 @@ def get_event_data(event_page_url):
 	else:
 		date_string = dateTimeTogether
 		event_data['date'] = get_datetime_object(date_string)
-	return event_data
+	return event_data['date']
 
 
 def get_datetime_object(date_string, time_string='none'):	
-	year = int(date_string[-5:])
+	comma_index = date_string.rfind(',')
+	year = int(date_string[comma_index+1:])
 	if "Jan" in date_string:
 		month = 1	
 	if "Feb" in date_string:
@@ -85,3 +86,4 @@ def show_event_info():
 ##for testing purposes
 print('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')			
 show_event_info()
+
